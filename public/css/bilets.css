@@ -1,0 +1,36 @@
+#slider-home{
+    background-color: blue;
+    height: 150px;
+}
+
+#store-home{
+    background:linear-gradient(
+        rgba(0, 0, 0, 0.4), 
+        rgba(0, 0, 0, 0.4)
+      ), url("../../public/img/background/ticket-office.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+      padding: 5% 0px;;
+}
+.tickets{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0px auto;
+}
+.tickets-background{
+    background-color: #ffffff;
+    width: 19.5%;
+    border-radius: 15px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 5% 0px;
+}
+
+.tickets-background img{
+    margin-bottom: 20px;
+}

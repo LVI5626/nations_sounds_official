@@ -1,19 +1,317 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
+        <title>Welcome!</title>
+        <link  rel="stylesheet" href="/css/header.css">
+        <link  rel="stylesheet" href="/css/home.css">
+        <link  rel="stylesheet" href="/css/carousel/carousel.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+        <link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSXoXV3qq70JlaV-l9CHv39AvhDU8SS29nNQ&usqp=CAU" />
+    </head>
+    <body>
+    <div class="main">
+    <div class="main2">
+            <div id="alert" style="">
+                <p><i class="fas fa-exclamation-triangle"> </i> Alerte Covid: Port du masque obligatoire</p>
+            </div>
+
+    <header class="header-res">
+        <div class="channel-flex">
+            <a href="../index.php" class="eechnls"><img src="/img/logos/nation_sounds.png"></a>
+        </div>
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+        <ul class="menu">    
+            <li><a href="index.php?page=grilles" class="grilles">Programme</a></li>
+            <li><a href="/concerts" class="direct">Scènes</a></li>
+            <li><a href="index.php?page=catalogue" class="catalogues">Billeterie</a></li>
+            <li><a href="index.php?page=grilles" class="grilles">FAQ</a></li>
+            <li><a href="index.php?page=eeo-live" class="direct">A propos</a></li>
+        </ul>
+
+    </header>
+    <header class="header-desk">
+        <div class="nav">
+            <nav>    
+                <div class="left">
+                    <a href="../index.php"><img src="/img/logos/nation_sounds.png" style="width: 100px;"></a>
+                </div>
+                <div class="right">
+                    <a href="index.php?page=eeo-live" class="ee" id="eeone">Programme</a>
+                    <a href="/concerts" class="ee" id="eetw">Scènes</a>
+                    <a href="index.php?page=billeterie" class="ee" id="eethr">Billeterie</a>
+                    <a href="index.php?page=scenes" class="ee" id="eethr">FAQ</a>
+                    <a href="index.php?page=contact" class="ee" id="eethr">A propos</a>
+                </div>
+            </nav>
+        </div>
+    </header> <div class="container">
         {% block stylesheets %}
             {#{{ encore_entry_link_tags('app') }}#}
         {% endblock %}
+ </div>
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
     </head>
     <body>
         {% block body %}{% endblock %}
+
+
+
+<div class="carousel-slider" id="responsive">
+    <h2>Nos partenaires</h2>
+    <div class="carousel-content" data-grid='{"xl":3,"lg":3,"md":2,"sm":1}' data-pagination="true">
+
+    {% for partner in partners %}
+        <aside class="slide-item" style="">
+                <img src="{{ partner.picture }}"/>
+                <p>{{ partner.name }}</p>
+        </aside>
+    {% endfor %}
+    </div>
+    <button class="carousel-prev-btn"><</button>
+    <button class="carousel-next-btn">></button>
+    <div class="carousel-pagination"></div>
+
+
+
+    <div class="button-link-partners" onclick="location.href='/partner';">
+                    Voir les actus
+    </div>
+     
+</div>
+
+
+
+
+             <div id="maps-home">
+            <h1>Maps</h1>
+        </div>
+            <footer>
+                <div class="footer-flex">
+                    <div class="footer-left">            
+                        <p>
+                            © 2019 Main Square Festival. All rights reserved.
+                            Live Nation France Festivals contact@mainsquarefestival.fr
+                            Politique de confidentialité    Cookies
+                        </p>
+                    </div>
+                    <div class="footer-right">
+                        <a href="#"> <img src="/img/socials/facebook.png"></a>
+                        <a href="#"> <img src="/img/socials/twitter.png"></a>
+                        <a href="#"> <img src="/img/socials/insta.png"></a>
+                    </div>
+                </div>
+            </footer>
+            </div>
+            </div>
+        {% block javascripts %}{% endblock %}
+
+<script>
+let carousel = (el, parameter) => {
+    el = el !==undefined ? el : "";
+    parameter = parameter !== undefined ? parameter : {};
+    let method = {
+        transition: parameter.transition !== undefined ? parameter.transition : null,
+        responsive: parameter.grid !== undefined ? parameter.grid : null,
+        pagination: parameter.pagination !== undefined ? parameter.pagination : false,
+        autoplay: parameter.autoplay !== undefined ? parameter.autoplay : null,
+        playTimer: parameter.autoplay !== undefined && parameter.autoplay.playTimer !== undefined
+            ? parameter.autoplay.playTimer
+            : 2000,
+    },trigger = document.querySelectorAll(".carousel-slider"+el);
+    Array.prototype.forEach.call(trigger, function (el) {
+        
+    let content = el.querySelector (".carousel-content"),
+        count = content.childElementCount,
+        responsive = method.responsive || JSON.parse (content.getAttribute ("data-grid")),
+        widths,
+        d_widths = el.offsetWidth,
+        c_widths = d_widths * count,
+        autoplay = method.autoplay || el.getAttribute ("data-autoplay"),
+        autoplay_timer = method.playTimer || el.getAttribute ("data-timer"),
+        is_pagination = method.pagination || content.getAttribute ("data-pagination"),
+        config = {
+            "lg": 1024,
+            "md": 768,
+            "sm": 667
+        },
+        step,
+        pagination_content = el.querySelector (".carousel-pagination");
+
+    content.firstElementChild.classList.add ("active");
+    content.style.transitionDuration = method.transition || "500ms";
+    this.autoplayEffect = null;
+
+    let index_settings = () => {//tabindexleri slide itemlerine aktarıyoruz
+        let slides = content.querySelectorAll (".slide-item");
+        for (i in slides) {
+            slides[ i ].tabIndex = i;
+        }
+    }, size = (widths) => {
+        let item_resize = el.querySelectorAll (".slide-item");
+        Array.prototype.forEach.call (item_resize, (item_size) => {
+            item_size.style.width = widths + "px";
+        });
+    }, responsive_grid = () => {
+        if (responsive) {
+            if (window.innerWidth >= config.lg) {
+                if (responsive.xl !== undefined) {
+                    gridCount = responsive.xl;
+                    widths = Number (d_widths) / Number (gridCount);
+                }
+            } else if (window.innerWidth >= config.md) {
+                if (responsive.lg !== undefined) {
+                    gridCount = responsive.lg;
+                    widths = Number (d_widths) / Number (gridCount);
+                    console.log (d_widths, gridCount, responsive)
+                }
+            } else if (window.innerWidth >= config.sm) {
+                if (responsive.md !== undefined) {
+                    gridCount = responsive.md;
+                    widths = Number (d_widths) / Number (gridCount);
+                }
+            } else if (window.innerWidth < config.sm) {
+                if (responsive.sm !== undefined) {
+                    gridCount = responsive.sm;
+                    widths = Number (d_widths) / Number (gridCount);
+                }
+            }
+        } else {
+            widths = d_widths;
+        }
+        size (widths);
+        c_widths = widths * content.lastElementChild.tabIndex;
+        content.style.minWidth = c_widths;
+        return widths;
+    };
+
+    let autoplay_ = () => {
+        if (autoplay) {
+            let i = 0;
+            let last_i = content.lastElementChild.tabIndex;
+            this.autoplayEffect = setInterval (() => {
+                if (last_i > i) {
+                    content.style.transform = "translate3d(-" + d_widths * i + "px,0px,0px)";
+                    content.children.item (i + 1).classList.add ("active");
+                    content.children.item (i).classList.remove ("active");
+                } else {
+                    content.lastElementChild.classList.remove ("active");
+                    content.firstElementChild.classList.add ("active");
+                    content.style.transform = "translate3d(" + 0 + "px,0px,0px)";
+
+                    i = 0;
+                }
+                i++;
+            }, Number (autoplay_timer));
+        }
+    }, pagination = () => {
+        if (is_pagination) {
+            let pagination_item = el.querySelector (".carousel-pagination");
+            for (let i = 0; i < count; i++) {
+                let p_item = document.createElement ("a");
+                p_item.href = "#!";
+                p_item.classList.add ("item");
+                p_item.tabIndex = i;
+                pagination_item.appendChild (p_item);
+            }
+        }
+    }, slider_next = (el) => {
+        let content = el.querySelector (".carousel-content");
+        let last_i = content.lastElementChild.tabIndex;
+        let i = content.querySelector (".slide-item.active").tabIndex + 1;
+        step = d_widths / responsive_grid ();
+        widths = d_widths / step;
+        if (step > 1) {
+            last_i = last_i - step + 1;
+        }
+        if (i <= last_i) {
+            content.children.item (i).classList.add ("active");
+            content.children.item (i - 1).classList.remove ("active");
+            let ml_ = widths * i;
+            content.style.transform = "translate3d(-" + ml_ + "px,0px,0px)";
+            i++;
+        } else {
+            i = 1;
+            content.lastElementChild.classList.remove ("active");
+            content.firstElementChild.classList.add ("active");
+            content.style.transform = "translate3d(" + 0 + "px,0px,0px)";
+        }
+    }, slider_prev = () => {
+        let content = el.querySelector (".carousel-content");
+        let last_i = content.lastElementChild.tabIndex;
+        let i = content.querySelector (".slide-item.active").tabIndex;
+        step = d_widths / responsive_grid ();
+        widths = d_widths / step;
+        if (i >= 1) {
+            content.children.item (i - 1).classList.add ("active");
+            content.children.item (i).classList.remove ("active");
+            i--;
+            let ml_ = widths * i;
+            content.style.transform = "translate3d(-" + ml_ + "px,0px,0px)";
+        } else {
+            i = last_i;
+            content.lastElementChild.classList.add ("active");
+            content.firstElementChild.classList.remove ("active");
+            if (step > 1) {
+                last_i = last_i - step + 1;
+            }
+            let ml_ = widths * ( last_i - 1 );
+            content.style.transform = "translate3d(-" + ml_ + "px,0px,0px)";
+            i--;
+        }
+
+    }, slider_direction = (el) => {
+        let prev = el.querySelector (".carousel-prev-btn");
+        let next = el.querySelector (".carousel-next-btn");
+        if (el.contains (prev) && el.contains (next)) {
+            prev.addEventListener ("click", () => {
+                window.clearInterval (this.autoplayEffect);
+                slider_prev (el);
+            }, false);
+
+            next.addEventListener ("click", () => {
+                window.clearInterval (this.autoplayEffect);
+                slider_next (el);
+            }, false);
+        }
+        if (el.contains (pagination_content)) {
+            pagination ();
+            let paginate = pagination_content.querySelectorAll (".item");
+            Array.prototype.forEach.call (paginate, (el) => {
+                el.addEventListener ("click", () => {
+                    window.clearInterval (this.autoplayEffect);
+                    let last_i = el.parentNode.lastChild.tabIndex,
+                        i = el.tabIndex;
+                    let ml_ = widths * i;
+                    content.style.transform = "translate3d(-" + ml_ + "px,0px,0px)";
+                }, false);
+            });
+        }
+    };
+    window.addEventListener ("resize", () => {
+        d_widths = el.offsetWidth;
+        console.log ("ekran değişti", d_widths);
+        responsive_grid ();
+    }, true);
+    responsive_grid ();
+    slider_direction (el);
+    autoplay_ ();
+    index_settings ();
+
+    });
+
+    return this;
+};
+
+carousel();
+
+</script>
+<style>
+
+
+
+</style>        
+    </body>
     </body>
 </html>
