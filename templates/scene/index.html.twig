@@ -1,0 +1,41 @@
+{% extends 'scene.html.twig' %}
+
+{% block title %}Scene index{% endblock %}
+
+{% block body %}
+    <h1>Scene index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Picture</th>
+                <th>Background</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for scene in scenes %}
+            <tr>
+                <td>{{ scene.id }}</td>
+                <td>{{ scene.name }}</td>
+                <td>{{ scene.picture }}</td>
+                <td>{{ scene.background }}</td>
+                <td>{{ scene.description }}</td>
+                <td>
+                    <a href="{{ path('scene_show', {'id': scene.id}) }}">show</a>
+                    <a href="{{ path('scene_edit', {'id': scene.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('scene_new') }}">Create new</a>
+{% endblock %}
