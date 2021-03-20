@@ -8,12 +8,20 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\PartnerRepository;
 use App\Repository\ArtistRepository;
 use App\Repository\SceneRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
 
 
 class HomeController extends AbstractController
 {
+         /**
+          * Require ROLE_USER for only this controller method.
+          *
+          * @IsGranted("ROLE_USER")
+          */
+
 
     public function index(ArtistRepository $artistRepository, PartnerRepository $partnerRepository, SceneRepository $sceneRepository): Response
     {
