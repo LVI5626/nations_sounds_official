@@ -18,10 +18,13 @@ class PartnerController extends AbstractController
     /**
      * @Route("/", name="partner_index", methods={"GET"})
      */
-    public function index(PartnerRepository $partnerRepository): Response
+    public function index(PartnerRepository $partnerRepository ): Response
     {
         return $this->render('partner/index.html.twig', [
-            'partners' => $partnerRepository->findAll(),
+            'radio' => $partnerRepository->findBy(['theme'=>'Radio']),
+            'journal' => $partnerRepository->findBy(['theme'=>'Journal']),
+            'chaîne' => $partnerRepository->findBy(['theme'=>'Chaîne']),
+            'boisson' => $partnerRepository->findBy(['theme'=>'Boisson']),
         ]);
     }
 

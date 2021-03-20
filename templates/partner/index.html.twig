@@ -1,39 +1,110 @@
-{% extends 'base.html.twig' %}
+{% extends 'partner.html.twig' %}
 
-{% block title %}Partner index{% endblock %}
+{% block title %}Nos partenaires - Nations Sounds{% endblock %}
 
 {% block body %}
-    <h1>Partner index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Picture</th>
-                <th>Theme</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for partner in partners %}
-            <tr>
-                <td>{{ partner.id }}</td>
-                <td>{{ partner.name }}</td>
-                <td>{{ partner.picture }}</td>
-                <td>{{ partner.theme }}</td>
-                <td>
-                    <a href="{{ path('partner_show', {'id': partner.id}) }}">show</a>
-                    <a href="{{ path('partner_edit', {'id': partner.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
+<h1>Nos partneaires</h1>
+    <h1>Radios</h1>
+<main class="twit-container">
+        {% for partner in radio %}
+            <article class="twit">
+                <div class="twit-content">
+                    <p class="twit-text"><img src="{{ partner.picture }}"/></p>
+                    <p>{{ partner.name }}</p>   
+                </div>
+            </article>
         {% endfor %}
-        </tbody>
-    </table>
+</main>
+    <h1>Journaux</h1>
 
-    <a href="{{ path('partner_new') }}">Create new</a>
+<main class="twit-container">
+        {% for partner in journal %}
+            <article class="twit">
+                <div class="twit-content">
+                    <p class="twit-text"><img src="{{ partner.picture }}"/></p>
+                    <p>{{ partner.name }}</p>   
+                </div>
+            </article>
+        {% endfor %}
+</main>
+
+
+    <h1>Boissons</h1>
+
+<main class="twit-container">
+        {% for partner in boisson %}
+            <article class="twit">
+                <div class="twit-content">
+                    <p class="twit-text"><img src="{{ partner.picture }}"/></p>
+                    <p>{{ partner.name }}</p>   
+                </div>
+            </article>
+        {% endfor %}
+</main>
+
+
+    <h1>Chaînes</h1>
+
+<main class="twit-container">
+        {% for partner in chaîne %}
+            <article class="twit">
+                <div class="twit-content">
+                    <p class="twit-text"><img src="{{ partner.picture }}"/></p>
+                    <p>{{ partner.name }}</p>   
+                </div>
+            </article>
+        {% endfor %}
+</main>
+
+<style>
+  .twit img{
+      width: 150px;
+      margin: auto;
+  }
+
+.twit-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px;
+    margin: -10px 0 0 -10px;
+    position: relative;
+    justify-content: space-around;
+  }
+  
+  .twit {
+    display: inline-block;
+    padding: 20px;
+    width: 30%;
+    height: 150px;
+    background-color: transparent;
+    border-radius: 20px;
+    display: flex;
+    align-items: flex-end;
+    margin: 3% 3%;
+    background-position: center !important;
+    background-size: cover !important;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .twit{
+      color: #fff;
+      text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+      font-size: 150%;
+      font-weight: bold;
+  }
+  
+  .twit:hover {
+  }
+  
+  #episodes-list{
+      padding: 5% 0px;
+      color: #fff;
+  }
+  
+  #episodes-list h1{
+      padding-bottom: 2%;
+  }
+</style>
 {% endblock %}

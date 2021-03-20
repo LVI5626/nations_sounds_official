@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+        <link  rel="stylesheet" href="/css/header.css">
+        <link  rel="stylesheet" href="/css/home.css">
+        <link  rel="stylesheet" href="/css/carousel/carousel.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+        <link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSXoXV3qq70JlaV-l9CHv39AvhDU8SS29nNQ&usqp=CAU" />
+    </head>
+    <body>
+    <div class="main">
+    <div class="main2">
+            <div id="alert" style="">
+                <p><i class="fas fa-exclamation-triangle"> </i> Alerte Covid: Port du masque obligatoire</p>
+            </div>
+
+    <header class="header-res">
+        <div class="channel-flex">
+            <a href=".././index.php" class="eechnls"><img src="/img/logos/nation_sounds.png"></a>
+        </div>
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+        <ul class="menu">    
+            <li><a href="/artist class="grilles">Programme</a></li>
+            <li><a href="/scene" class="direct">Scènes</a></li>
+            <li><a href="index.php?page=catalogue" class="catalogues">Billeterie</a></li>
+            <li><a href="/faq" class="grilles">FAQ</a></li>
+            <li><a href="a-propos" class="direct">A propos</a></li>
+        </ul>
+
+    </header>
+    <header class="header-desk">
+        <div class="nav">
+            <nav>    
+                <div class="left">
+                    <a href="../../index.php"><img src="/img/logos/nation_sounds.png" style="width: 100px;"></a>
+                </div>
+                <div class="right">
+                    <a href="/artist" class="ee" id="eeone">Programme</a>
+                    <a href="/scene" class="ee" id="eetw">Scènes</a>
+                    <a href="index.php?page=billeterie" class="ee" id="eethr">Billeterie</a>
+                    <a href="/faq" class="ee" id="eethr">FAQ</a>
+                    <a href="a-propos" class="ee" id="eethr">A propos</a>
+                </div>
+            </nav>
+        </div>
+    </header> <div class="container">
+        {% block stylesheets %}
+            {#{{ encore_entry_link_tags('app') }}#}
+        {% endblock %}
+ </div>
+
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+
+             <div id="maps-home">
+            <h1>Maps</h1>
+        </div>
+            <footer>
+                <div class="footer-flex">
+                    <div class="footer-left">            
+                        <p>
+                            © 2019 Main Square Festival. All rights reserved.
+                            Live Nation France Festivals contact@mainsquarefestival.fr
+                            Politique de confidentialité    Cookies
+                        </p>
+                    </div>
+                    <div class="footer-right">
+                        <a href="#"> <img src="/img/socials/facebook.png"></a>
+                        <a href="#"> <img src="/img/socials/twitter.png"></a>
+                        <a href="#"> <img src="/img/socials/insta.png"></a>
+                    </div>
+                </div>
+            </footer>
+            </div>
+            </div>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

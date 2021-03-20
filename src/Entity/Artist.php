@@ -43,7 +43,7 @@ class Artist
     private $date;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="text")
      */
     private $hour;
 
@@ -51,6 +51,11 @@ class Artist
      * @ORM\Column(type="text")
      */
     private $scene;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $photo2;
 
     public function getId(): ?int
     {
@@ -77,6 +82,17 @@ class Artist
     public function setPhoto(string $photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function getPhoto2(): ?string
+    {
+        return $this->photo2;
+    }
+    public function setPhoto2(string $photo2): self
+    {
+        $this->photo2 = $photo2;
 
         return $this;
     }
@@ -117,7 +133,19 @@ class Artist
         return $this;
     }
 
-    public function getHour(): ?\DateTimeInterface
+    public function getHour(): ?string
+    {
+        return $this->hour;
+    }
+
+    public function setHour(string $hour): self
+    {
+        $this->hour = $hour;
+
+        return $this;
+    }
+
+   /* public function getHour(): ?\DateTimeInterface
     {
         return $this->hour;
     }
@@ -128,6 +156,10 @@ class Artist
 
         return $this;
     }
+    
+    
+    @ORM\Column(type="time")
+    */
 
     public function getScene(): ?string
     {

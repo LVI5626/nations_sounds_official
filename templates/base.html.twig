@@ -2,7 +2,7 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>Welcome!</title>
+        <title>{% block title %}{% endblock %}</title>
         <link  rel="stylesheet" href="/css/header.css">
         <link  rel="stylesheet" href="/css/home.css">
         <link  rel="stylesheet" href="/css/carousel/carousel.css">
@@ -18,16 +18,16 @@
 
     <header class="header-res">
         <div class="channel-flex">
-            <a href="../index.php" class="eechnls"><img src="/img/logos/nation_sounds.png"></a>
+            <a href=".././index.php" class="eechnls"><img src="/img/logos/nation_sounds.png"></a>
         </div>
         <input class="menu-btn" type="checkbox" id="menu-btn" />
         <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
         <ul class="menu">    
-            <li><a href="index.php?page=grilles" class="grilles">Programme</a></li>
-            <li><a href="/concerts" class="direct">Scènes</a></li>
+            <li><a href="/artist" class="grilles">Programme</a></li>
+            <li><a href="/scene" class="direct">Scènes</a></li>
             <li><a href="index.php?page=catalogue" class="catalogues">Billeterie</a></li>
-            <li><a href="index.php?page=grilles" class="grilles">FAQ</a></li>
-            <li><a href="index.php?page=eeo-live" class="direct">A propos</a></li>
+            <li><a href="/faq" class="grilles">FAQ</a></li>
+            <li><a href="a-propos" class="direct">A propos</a></li>
         </ul>
 
     </header>
@@ -35,20 +35,19 @@
         <div class="nav">
             <nav>    
                 <div class="left">
-                    <a href="../index.php"><img src="/img/logos/nation_sounds.png" style="width: 100px;"></a>
+                    <a href="../../index.php"><img src="/img/logos/nation_sounds.png" style="width: 100px;"></a>
                 </div>
                 <div class="right">
-                    <a href="index.php?page=eeo-live" class="ee" id="eeone">Programme</a>
-                    <a href="/concerts" class="ee" id="eetw">Scènes</a>
+                    <a href="/artist" class="ee" id="eeone">Programme</a>
+                    <a href="/scene" class="ee" id="eetw">Scènes</a>
                     <a href="index.php?page=billeterie" class="ee" id="eethr">Billeterie</a>
-                    <a href="index.php?page=scenes" class="ee" id="eethr">FAQ</a>
-                    <a href="index.php?page=contact" class="ee" id="eethr">A propos</a>
+                    <a href="/faq" class="ee" id="eethr">FAQ</a>
+                    <a href="a-propos" class="ee" id="eethr">A propos</a>
                 </div>
             </nav>
         </div>
     </header> <div class="container">
         {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
         {% endblock %}
  </div>
 
@@ -58,35 +57,28 @@
 
 
 
-<div class="carousel-slider" id="responsive">
-    <h2>Nos partenaires</h2>
-    <div class="carousel-content" data-grid='{"xl":3,"lg":3,"md":2,"sm":1}' data-pagination="true">
-
-    {% for partner in partners %}
-        <aside class="slide-item" style="">
-                <img src="{{ partner.picture }}"/>
-                <p>{{ partner.name }}</p>
-        </aside>
-    {% endfor %}
-    </div>
-    <button class="carousel-prev-btn"><</button>
-    <button class="carousel-next-btn">></button>
-    <div class="carousel-pagination"></div>
-
-
-
-    <div class="button-link-partners" onclick="location.href='/partner';">
-                    Voir les actus
-    </div>
-     
-</div>
-
-
-
 
              <div id="maps-home">
-            <h1>Maps</h1>
-        </div>
+                    <h1>Maps</h1>
+            </div>
+            <div class="carousel-slider" id="responsive">
+                    <h2>Nos partenaires</h2>
+                        <div class="carousel-content" data-grid='{"xl":3,"lg":3,"md":2,"sm":2}' data-pagination="true">
+
+                            {% for partner in partners %}
+                                <aside class="slide-item" style="">
+                                        <img src="{{ partner.picture }}"/><p>
+                                        <p>{{ partner.name }}</p>
+                                </aside>
+                            {% endfor %}
+                        </div>
+                    <button class="carousel-prev-btn"><</button>
+                    <button class="carousel-next-btn">></button>
+                        <div class="carousel-pagination"></div>
+                        <div class="button-link-partners" onclick="location.href='/partner';">
+                                Voir les actus
+                        </div>  
+            </div>
             <footer>
                 <div class="footer-flex">
                     <div class="footer-left">            
@@ -104,6 +96,9 @@
                 </div>
             </footer>
             </div>
+            </div>
+            <div style="background-color: #F72585;">
+            <p>NATIONS SOUNDS 2021</p>
             </div>
         {% block javascripts %}{% endblock %}
 
@@ -306,12 +301,6 @@ let carousel = (el, parameter) => {
 
 carousel();
 
-</script>
-<style>
-
-
-
-</style>        
-    </body>
-    </body>
+</script>    
+</body>
 </html>

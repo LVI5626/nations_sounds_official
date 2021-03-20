@@ -1,20 +1,130 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Nations Sounds{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/nations_sounds_official/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/nations_sounds_official/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
+<div style="background-color:#4463EB; color: #fff; padding: 15px 0px;">
+<div style="width: 85%; margin: auto;">
+<h1>Nation Sounds</h1>
+<h1>Festival de musique</h1>
+<h1>Jazz/RAP</h1>
+<h1>Rock/Pop-Folck</h1>
+<h1>Electro</h1>
 </div>
+</div>
+<br><br><br><br><br><br><br>
+
+<h1>Voir la liste des artistes</h1>
+<div class="scenes">
+                <div class="carousel-slider" id="responsive">
+                    <h2>Nos Scènes</h2>
+                        <div class="carousel-content scenes" data-grid='{"xl":3,"lg":3,"md":2,"sm":1}' data-pagination="true">
+                            {% for scene in scenes %}
+                                <aside class="slide-item" style="">
+                                         <a href="{{ path('scene_show', {'name': scene.name}) }}"><img src="{{ scene.picture }}"/><p>
+                                        <p>{{ scene.name }}</p>
+                                       </a>
+                                </aside>
+                            {% endfor %}
+                        </div>
+                    <button class="carousel-prev-btn"><</button>
+                    <button class="carousel-next-btn">></button>
+                        <div class="carousel-pagination"></div>
+                      <!--  <div class="button-link-partners" onclick="location.href='/partner';">
+                                Voir les actus
+                        </div>  -->
+            </div>
+</div>
+<div style="background-color:#FF4298; padding:40px 0px; color: #fff; border-radius:10px;">
+<h1>Afficher mon Billet</h1>
+</div>
+
+<h1>Artistes</h1>
+
+    <div style="background-color: #4463EB; width: 80%; margin: auto; display: flex; padding: 40px 20px; flex-wrap: wrap; font-size: 24px; justify-content: center;">
+    {% for artist in artists %}
+        <aside style="margin:20px 40px;">
+                <a href="{{ path('artist_show', {'id': artist.id}) }}" style="color: #FECC00; text-decoration: none; font-weight: bold;"><p style="text-align: center;">{{ artist.name }}</p></a>
+        </aside>
+    {% endfor %}
+    </div>
+
+
+                <div class="carousel-slider" id="responsive">
+                    <h2>Le planning</h2>
+                        <div class="carousel-content" data-grid='{"xl":3,"lg":3,"md":2,"sm":1}' data-pagination="true">
+                                <aside class="slide-item" style="">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>The table body</td>
+                                                    <td>with two columns</td>
+                                                </tr>
+                                                {% for  artist in show1 %}
+                                                <tr>
+                                                    <td><p>{{ artist.name }}</p></td>
+                                                    <td>{{ artist.hour }}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>                      
+                                </aside>
+                                                                <aside class="slide-item" style="">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>The table body</td>
+                                                    <td>with two columns</td>
+                                                </tr>
+                                                {% for partner in partners %}
+                                                <tr>
+                                                    <td><p>{{ partner.name }}</p></td>
+                                                    <td>15 Heures</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>                      
+                                </aside>
+                                                                <aside class="slide-item" style="">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>The table body</td>
+                                                    <td>with two columns</td>
+                                                </tr>
+                                                {% for partner in partners %}
+                                                <tr>
+                                                    <td><p>{{ partner.name }}</p></td>
+                                                    <td>15 Heures</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>                      
+                                </aside>
+                                                                <aside class="slide-item" style="">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>The table body</td>
+                                                    <td>with two columns</td>
+                                                </tr>
+                                                {% for partner in partners %}
+                                                <tr>
+                                                    <td><p>{{ partner.name }}</p></td>
+                                                    <td>15 Heures</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>                      
+                                </aside>
+                        </div>
+                    <button class="carousel-prev-btn"><</button>
+                    <button class="carousel-next-btn">></button>
+                        <div class="carousel-pagination"></div>
+                        <div class="button-link-partners" onclick="location.href='/partner';">
+                                Voir les actus
+                        </div>  
+            </div>
 {% endblock %}
