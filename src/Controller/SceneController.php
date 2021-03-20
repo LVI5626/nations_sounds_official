@@ -11,19 +11,25 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ArtistRepository;
+use Container03Vr84x\getPartnerRepositoryService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-/**
- * @Route("/scene")
- */
+
 class SceneController extends AbstractController
 {
     /**
-     * @Route("/", name="scene_index", methods={"GET"})
+     * @Route("/scene", name="scene_index", methods={"GET"})
+     * 
+     * Require ROLE_USER for only this controller method.
+     *
+     * @IsGranted("ROLE_USER")
      */
-    public function index(SceneRepository $sceneRepository): Response
+    public function index(SceneRepository $sceneRepository, PartnerRepository $partnerRepository): Response
     {
         return $this->render('scene/index.html.twig', [
             'scenes' => $sceneRepository->findAll(),
+            'partners' => $partnerRepository->findAll(),
         ]);
     }
 
@@ -53,7 +59,7 @@ class SceneController extends AbstractController
 
 
     /**
-     * @Route("/{id}", name="scene_show", methods={"GET"})
+     * @Route("/fr/scene/{name}", name="scene_show", methods={"GET"})
      */
 
     public function show(Scene $scene, PartnerRepository $partnerRepository, ArtistRepository $artistRepository): Response
@@ -61,18 +67,19 @@ class SceneController extends AbstractController
         $partner = $partnerRepository->findAll();
         //$artists = $artist->findAll();
         $artists = $artistRepository;
-
-
         return $this->render('scene/show.html.twig', [
             'scene' => $scene,
             'artists' => $artists,
+            'partners' => $partnerRepository->findAll(),
         ]);
     }
 
+
+
     /**
-     * @Route("/{id}/edit", name="scene_edit", methods={"GET","POST"})
+     * @Route("/scene/{id}/edit", name="scene_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Scene $scene): Response
+    public function edit(Request $request, Scene $scene, PartnerRepository $partnerRepository): Response
     {
         $form = $this->createForm(SceneType::class, $scene);
         $form->handleRequest($request);
@@ -85,12 +92,13 @@ class SceneController extends AbstractController
 
         return $this->render('scene/edit.html.twig', [
             'scene' => $scene,
+            'partners' => $partnerRepository->findAll(),
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="scene_delete", methods={"DELETE"})
+     * @Route("/scene/{id}", name="scene_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Scene $scene): Response
     {
